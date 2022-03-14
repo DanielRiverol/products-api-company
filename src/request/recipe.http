@@ -1,0 +1,37 @@
+###
+GET http://localhost:3000/ HTTP/1.1
+
+###
+GET http://localhost:3001/api/v1/recipes HTTP/1.1
+###
+GET http://localhost:3001/api/v1/recipes/600a3a606243c1218b47f540 HTTP/1.1
+###
+POST http://localhost:3000/api/v1/recipes HTTP/1.1
+Content-Type: application/json
+x-access-token: x-acces-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMWIxNmI4YjZiOWZlNDA3MDg4ODJhNSIsImlhdCI6MTYxMjM4ODA0NCwiZXhwIjoxNjEyNDc0NDQ0fQ.WeqCES1kta7dHbkZ46BQZXSkbz2bfnXI1vA6YqgYhoc
+
+{
+   "title": "String",
+        "description": "String",
+        "ingredients": "String",
+        "procedure": "String",
+        "preparation_Time":12,
+        "cooking_Time": 12,
+        "imgUrl": "String"
+}
+###
+PUT http://localhost:3000/api/v1/recipes/600a3cd4eca40d2268ed16bb HTTP/1.1
+Content-Type: application/json
+
+{
+   "title": "String2",
+        "description": "String2",
+        "ingredients": "String2",
+        "procedure": "String2",
+        "preparation_Time":14,
+        "cooking_Time": 14,
+        "imgUrl": "String2"
+}
+### DELETE
+DELETE http://localhost:3000/api/v1/recipes/600a3cd4eca40d2268ed16bb  HTTP/1.1
+

@@ -1,0 +1,49 @@
+import { Schema, model } from 'mongoose'
+import bcrypt from 'bcryptjs'
+
+const userSchema = new Schema(
+    {
+        username: {
+            type: String,
+            unique: true,
+        },
+        email: {
+            type: String,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        status: {
+            type: String, 
+            enum: ['Pending', 'Active'],
+            default: 'Pending'
+          },
+          confirmationCode: { 
+            type: String, 
+            unique: true },
+
+        roles: [
+            {
+                ref: 'Role',
+                type: Schema.Types.ObjectId,
+            },
+        ],
+    },
+    {
+        timestamps: true,
+        versionKey: false,
+    }
+)
+//Encriptación de password
+userSchema.statics.encryptPassword = async (password) => {
+    const salt = await bcrypt.genSalt(10)
+    return await bcrypt.hash(password, salt)
+}
+//Desencriptación de password y comparación
+userSchema.statics.comparePassword = async (password, receivedPassword) => {
+    return await bcrypt.compare(password, receivedPassword)
+}
+
+export default model('User', userSchema)
